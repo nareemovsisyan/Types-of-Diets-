@@ -1,0 +1,192 @@
+---
+title: "Final Project"
+author: "Nareh Movsisyan"
+date: "2022-11-25"
+output: 
+   rmarkdown::html_document:
+    theme: simplex
+    toc: true
+    toc_float: true
+  
+
+---
+
+```{r, include =FALSE}
+library("readxl")
+library('tidyverse')
+dash <- read_xlsx("C:/Users/nareh/Downloads/nareh/dash.xlsx")
+vegan <- read_xlsx("C:/Users/nareh/Downloads/nareh/vegan.xlsx")
+keto <- read_xlsx("C:/Users/nareh/Downloads/nareh/keto.xlsx")
+mediterranean <- read_xlsx("C:/Users/nareh/Downloads/nareh/mediterranean.xlsx")
+paleo <- read_xlsx("C:/Users/nareh/Downloads/nareh/paleo.xlsx")
+test <- dash %>%
+  mutate(ratio = `Protein(g)` / `Fat(g)`) 
+
+```
+
+The dataset is from Kaggle.com 
+
+# Paleo diet: What is it and why is it so popular?
+
+A paleo diet is an eating plan based on foods humans might have eaten during the Paleolithic Era.
+
+A modern paleo diet includes fruits, vegetables, lean meats, fish, eggs, nuts and seeds. These are foods that in the past people could get by hunting and gathering. These foods include grains, legumes and dairy products.
+
+Other names for a paleo diet include Paleolithic diet, Stone Age diet, hunter-gatherer diet and cave man diet.
+
+The purpose of a paleo diet is to eat foods likely eaten by early humans. The diet is based on the idea that our genes are not well adjusted for modern diets that grew out of farming. 
+
+
+##### **Why you might follow a paleo diet?**
+
+* Lose weight or keep a healthy weight.
+* Reduce heart disease, or cardiovascular, risk factors.
+
+\n
+##### *Now let's analyze the data connected with this type of diet.*
+
+```{r, echo=FALSE}
+barplot(table(paleo$Cuisine_type), col = 'red')
+```
+
+##### *As we can see most recipes we have here are from American cuisine.*
+
+**Here you can see the summary of  "Fat(g)"  column.**
+
+```{r, echo=FALSE}
+summary(paleo$`Fat(g)`)
+```
+**The lowest fat food (0.02) is Paleo Margaritas, which recipe you can find here:**
+
+**[HERE'S THE LINK](https://againstallgrain.com/2014/04/07/paleo-margaritas/)**
+
+![alt text][id]
+
+**And the highest fat (1869.59) has Paleo Blondies.**
+
+**[HERE'S THE LINK](https://www.bakerita.com/paleo-chocolate-chip-blondies/)**
+
+
+# What is the Vegan diet?
+
+Veganism is defined as a way of living that attempts to exclude all forms of animal exploitation and cruelty, whether for food, clothing, or any other purpose.
+
+That’s why a vegan diet avoids all animal products, including meat, eggs, and dairy.
+
+People choose to follow a vegan diet for various reasons. These usually range from ethics to environmental concerns, but they can also stem from a desire to improve health.
+
+Vegan diet can help to lose weight. 
+
+
+##### **Adopting a vegan diet may help keep your blood sugar in check and type 2 diabetes at bay.**
+
+* Several studies show that vegans benefit from lower blood sugar levels, higher insulin sensitivity, and up to a 78% lower risk of developing type 2 diabetes than non-vegans.
+* In addition, vegan diets reportedly lower blood sugar levels in people with diabetes up to 2.4 times more than diets recommended by the ADA, AHA, and NCEP.
+
+```{r, echo=FALSE}
+ barplot(table(vegan$Cuisine_type), border="red", col="white")
+```
+
+
+
+##### *And again it's abvious that mostly the recipes are from US. But you know the funny fact connected with this? Most vegans are from China and there are a few people in US who keep the Vegan diet.*
+
+Here you can see the summaries of:
+
+"Protein(g)"
+
+```{r, echo=FALSE}
+summary(vegan$`Protein(g)`)
+```
+
+"Carbs(g)"
+```{r, echo=FALSE}
+summary(vegan$`Carbs(g)`)
+```
+
+"Fat(g)"
+```{r, echo=FALSE}
+summary(vegan$`Fat(g)`)
+```
+
+
+
+
+**The highest protein food is Pumpkin Pie Tarts, which can satisfy your hunger for 8 hours. And here you can find the recipe of it.**
+
+**[HERE'S THE LINK](https://delightfulemade.com/pumpkin-pie-tarts/) **
+
+
+# The Ketogenic Diet
+
+The ketogenic diet (or keto diet, for short) is a low carb, high fat diet that offers many health benefits.
+
+In fact, many studies show that this type of diet can help you lose weight and improve your health.
+
+Ketogenic diets may even have benefits against diabetes, cancer, epilepsy, and Alzheimer’s disease.
+
+A ketogenic diet can help you lose slightly more weight than a low fat diet. This often happens with less hunger.
+
+
+# About the Mediterranean Diet
+
+The mediterranean diet is based on the diets of people from Crete, Greece, and Southern Italy. The mediterranean diet has become popular because individuals show low rate of heart disease, chronic disease, and obesity. The mediterranean diet profile focuses on whole grains, good fats (fish, olive oil, nuts etc.), vegetables, fruits, fish, and very low consumption of any non-fish meat. Along with food, the mediterranean diet emphasizes the need to spend time eating with family and physical activity.
+
+
+##### **The macrobiotic diet food pyramid represents the importance of finding structure, daily habits, and harmony to improve stress management, mental health, and physical health. With this in mind, here is a sample macrobiotic diet meal plan:**
+
+* Breakfast: Oatmeal & Steamed Greens
+* Snack: Steamed Sweet Potatoes
+* Lunch: Steamed Sourdough Bread with Tahini & Sauerkraut & Miso Soup with Tofu
+* Snack: Seeds or Nuts
+* Dinner: Pasta Primavera & Salad
+
+```{r echo = FALSE}
+x <- mediterranean$`Protein(g)`
+y <- mediterranean$`Fat(g)`
+plot(x, y, main = "Suspension of protein from fat",
+     xlab = "Protein", ylab = "Fat",
+     pch = 19, frame = FALSE)
+plot(x, y, main = "Suspension of protein from fat",
+     xlab = "Protein", ylab = "Fat",
+     pch = 19, frame = FALSE)
+abline(lm(y ~ x, data = mediterranean), col = "red")
+```
+
+
+# Dash diet: Healthy eating to lower your blood pressure
+
+DASH stands for Dietary Approaches to Stop Hypertension. The DASH diet is a healthy-eating plan designed to help treat or prevent high blood pressure (hypertension).
+
+The DASH diet includes foods that are rich in potassium, calcium and magnesium. These nutrients help control blood pressure. The diet limits foods that are high in sodium, saturated fat and added sugars.
+
+Studies have shown that the DASH diet can lower blood pressure in as little as two weeks. The diet can also lower low-density lipoprotein (LDL or "bad") cholesterol levels in the blood.
+
+##### **When following DASH, it is important to choose foods that are:**
+
+* Rich in potassium, calcium, magnesium, fiber and protein
+* Low in saturated fat
+* Low in sodium
+
+```{r echo = FALSE}
+summary(test$ratio)
+```
+
+We've count the ratio in Dash diet (Protein(g) / Fat(g)). 
+It helps us to understand that there are some kind of food that have Protein but the Fat is equal to 0 or too close.
+For example:
+
+```{r, echo=FALSE, results='asis'}
+library(knitr)
+kable(test [1:7, ])
+```
+
+
+* Brooklyn Cocktail (Fat = 0)
+* Three Dots And A Dash (Fat = 0)
+* The Ginger Side (Fat = 0)
+* Emerald Cocktail (Fat = 0)
+
+Predominant component of these are wiskey, ginger and so on.
+
+
